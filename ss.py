@@ -114,12 +114,3 @@ def start_server(chat_box):
         show_message(chat_box, f"[System] Connected: {addr}")
         threading.Thread(target=receive_messages, args=(conn, chat_box), daemon=True).start()
     threading.Thread(target=run, daemon=True).start()
-
-                      font=("Consolas", 13), bd=0, relief=tk.FLAT,
-                      padx=10, command=lambda: send_photo(chat_box))
-photo_btn.pack(side=tk.RIGHT, padx=(0, 5))
-
-send_btn = tk.Button(frame, text="Send", bg="#5865f2", fg="white",
-                     font=("Consolas", 11, "bold"), bd=0, relief=tk.FLAT,
-                     padx=12, command=lambda: send_message(entry, chat_box))
-send_btn.pack(side=tk.RIGHT)
