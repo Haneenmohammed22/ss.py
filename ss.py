@@ -81,27 +81,3 @@ def start_server(chat_box):
         show_message(chat_box, f"[System] Connected: {addr}")
         threading.Thread(target=receive_messages, args=(conn, chat_box), daemon=True).start()
     threading.Thread(target=run, daemon=True).start()
-
-# UI Setup (مماثل للكلاينت مع زر الصورة)
-root = tk.Tk()
-root.title("Chat Server")
-root.geometry("500x600")
-root.configure(bg="#1e1e2e")
-
-chat_box = scrolledtext.ScrolledText(root, state=tk.DISABLED, bg="#2a2a3d", fg="#e0e0e0")
-chat_box.pack(padx=10, pady=10, fill=tk.BOTH, expand=True)
-
-frame = tk.Frame(root, bg="#1e1e2e")
-frame.pack(fill=tk.X, padx=10, pady=10)
-
-entry = tk.Entry(frame, bg="#2a2a3d", fg="white", bd=0)
-entry.pack(side=tk.LEFT, fill=tk.X, expand=True, ipady=8, padx=(0, 5))
-
-img_btn = tk.Button(frame, text="📷", command=lambda: send_image(chat_box))
-img_btn.pack(side=tk.RIGHT, padx=2)
-
-send_btn = tk.Button(frame, text="Send", command=lambda: send_message(entry, chat_box))
-send_btn.pack(side=tk.RIGHT)
-
-start_server(chat_box)
-root.mainloop()
