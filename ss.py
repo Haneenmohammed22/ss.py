@@ -6,7 +6,7 @@ from PIL import Image, ImageTk
 import io
 
 HOST = '0.0.0.0'
-PORT = 50000
+PORT = 50800
 
 client_conn = None
 
