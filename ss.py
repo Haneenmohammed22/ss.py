@@ -115,27 +115,6 @@ def start_server(chat_box):
         threading.Thread(target=receive_messages, args=(conn, chat_box), daemon=True).start()
     threading.Thread(target=run, daemon=True).start()
 
-# ── UI ───────────────────────────────────────────────────────────────────────
-root = tk.Tk()
-root.title("Chat Server")
-root.geometry("500x650")
-root.resizable(False, False)
-root.configure(bg="#1e1e2e")
-
-chat_box = scrolledtext.ScrolledText(root, state=tk.DISABLED, wrap=tk.WORD,
-                                      bg="#2a2a3d", fg="#e0e0e0",
-                                      font=("Consolas", 11), bd=0)
-chat_box.pack(padx=10, pady=(10, 5), fill=tk.BOTH, expand=True)
-
-frame = tk.Frame(root, bg="#1e1e2e")
-frame.pack(fill=tk.X, padx=10, pady=(0, 10))
-
-entry = tk.Entry(frame, font=("Consolas", 11), bg="#2a2a3d", fg="white",
-                 insertbackground="white", bd=0, relief=tk.FLAT)
-entry.pack(side=tk.LEFT, fill=tk.X, expand=True, ipady=8, padx=(0, 5))
-entry.bind("<Return>", lambda e: send_message(entry, chat_box))
-
-photo_btn = tk.Button(frame, text="📷", bg="#43b581", fg="white",
                       font=("Consolas", 13), bd=0, relief=tk.FLAT,
                       padx=10, command=lambda: send_photo(chat_box))
 photo_btn.pack(side=tk.RIGHT, padx=(0, 5))
@@ -144,6 +123,3 @@ send_btn = tk.Button(frame, text="Send", bg="#5865f2", fg="white",
                      font=("Consolas", 11, "bold"), bd=0, relief=tk.FLAT,
                      padx=12, command=lambda: send_message(entry, chat_box))
 send_btn.pack(side=tk.RIGHT)
-
-start_server(chat_box)
-root.mainloop()
